@@ -23,16 +23,16 @@ import proxy from './proxy';
 
 const configs = {
     identityserver: {
-        issuer: 'https://test-mysurgery.singhealth.com.sg/identity',
+        issuer: 'https://domain/identity',
         clientId: 'native.code',
         redirectUrl: 'io.identityserver.demo:/oauthredirect',
         additionalParameters: {},
         scopes: ['openid', 'profile', 'offline_access'],
 
         serviceConfiguration: {
-            authorizationEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/authorize',
-            tokenEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/token',
-            revocationEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/endsession'
+            authorizationEndpoint: 'https://domain/identity/connect/authorize',
+            tokenEndpoint: 'https://domain/identity/connect/token',
+            revocationEndpoint: 'https://domain/identity/connect/endsession'
         }
     }
 };
@@ -45,7 +45,7 @@ export async function logInAsync() {
             type: 'success',
             user: {
                 name: 'Nguyen Van Huan',
-                email: 'nguyen.van.huan@ihis.com.sg',
+                email: 'nguyen.van.huan@domain.com.sg',
                 photoUrl: ''
             },
             authState: { ...newState }
@@ -69,7 +69,7 @@ export async function refreshTokenAsync(rToken) {
             type: 'success',
             user: {
                 name: 'Nguyen Van Huan',
-                email: 'nguyen.van.huan@ihis.com.sg',
+                email: 'nguyen.van.huan@domain.com.sg',
                 photoUrl: ''
             },
             authState: {
