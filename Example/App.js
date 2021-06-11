@@ -137,12 +137,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // credentials context
 import { CredentialsContext } from './components/CredentialsContext';
+import { Linking } from 'react-native';
 
 const App = () => {
   const [appReady, setAppReady] = useState(false);
   const [storedCredentials, setStoredCredentials] = useState("");
+  
 
   const checkLoginCredentials = () => {
+    console.log('checkLoginCredentials');
     AsyncStorage.getItem('flowerCribCredentials')
       .then((result) => {
         if (result !== null) {

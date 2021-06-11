@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Linking } from 'react-native';
+import { Linking, LogBox,Alert } from 'react-native';
 import { authorize, refresh, revoke, prefetchConfiguration } from 'react-native-app-auth';
 import proxy from './proxy';
 
@@ -23,16 +23,16 @@ import proxy from './proxy';
 
 const configs = {
     identityserver: {
-        issuer: 'https://domain/identity',
+        issuer: 'https://test-mysurgery.singhealth.com.sg/identity',
         clientId: 'native.code',
         redirectUrl: 'io.identityserver.demo:/oauthredirect',
         additionalParameters: {},
         scopes: ['openid', 'profile', 'offline_access'],
 
         serviceConfiguration: {
-            authorizationEndpoint: 'https://domain/identity/connect/authorize',
-            tokenEndpoint: 'https://domain/identity/connect/token',
-            revocationEndpoint: 'https://domain/identity/connect/endsession'
+            authorizationEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/authorize',
+            tokenEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/token',
+            revocationEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/endsession'
         }
     }
 };
@@ -45,7 +45,7 @@ export async function logInAsync() {
             type: 'success',
             user: {
                 name: 'Nguyen Van Huan',
-                email: 'nguyen.van.huan@domain.com.sg',
+                email: 'nguyen.van.huan@ihis.com.sg',
                 photoUrl: ''
             },
             authState: { ...newState }
@@ -69,7 +69,7 @@ export async function refreshTokenAsync(rToken) {
             type: 'success',
             user: {
                 name: 'Nguyen Van Huan',
-                email: 'nguyen.van.huan@domain.com.sg',
+                email: 'nguyen.van.huan@ihis.com.sg',
                 photoUrl: ''
             },
             authState: {
@@ -98,25 +98,28 @@ export async function logoutAsync(accessToken) {
 }
 
 export async function loginSingpass() {
-    const config = configs.identityserver;
+    const config = {
+        redirectUrl: 'io.identityserver.demo:/oauthredirect?isSingpass=true',
+        ...configs.identityserver
+    };
     // get url singpass
     const url = config.issuer + '/api/login';
     const response = await proxy.get(url);
     const singpassOrginalUrl = await response.data;
     // update url singpass (only demo)
-    const singpassUrl = updateurl(singpassOrginalUrl);
-    // redirect with this url
+    const singpassUrl = updateurl(singpassOrginalUrl);// redirect with this url
     if (Linking.canOpenURL(singpassUrl)) {
-        Linking.openURL(singpassUrl);
+        Linking.addListener('url', (e) => {
+            console.log('event call back url', e);
+        });
+        await Linking.openURL(singpassUrl);
+        console.log('done singpass');
     }
 }
 
-
 export function updateurl(url) {
-    console.log('get link from is4:', url);
     var stateUrl = paramReplace('state', url, 'custom_state')
     var nonceUrl = paramReplace('nonce', stateUrl, 'custom_nonce')
-    console.log('replace state nonce:', nonceUrl);
     return nonceUrl;
 }
 

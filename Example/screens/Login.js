@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import { StatusBar } from 'react-native';
 
 // formik
@@ -47,7 +47,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
 
-const Login = ({ navigation }) => {
+const Login = ({ route,navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
@@ -98,13 +98,13 @@ const Login = ({ navigation }) => {
 
     Singpass.loginSingpass()
       .then((result) => {
-        const { type, user, authState } = result;
-        if (type == 'success') {
-          const { email, name, photoUrl } = user;
-          persistLogin({ email, name, photoUrl, authState }, 'Singpass signin successful', 'SUCCESS');
-        } else {
-          handleMessage('Singpass Signin was cancelled');
-        }
+        //   const { type, user, authState } = result;
+        //   if (type == 'success') {
+        //     const { email, name, photoUrl } = user;
+        //     persistLogin({ email, name, photoUrl, authState }, 'Singpass signin successful', 'SUCCESS');
+        //   } else {
+        //     handleMessage('Singpass Signin was cancelled');
+        //   }
         setSingpassSubmitting(false);
       })
       .catch((error) => {
@@ -114,7 +114,7 @@ const Login = ({ navigation }) => {
       });
   };
 
-  
+
   const handleIs4Signin = () => {
     setIs4Submitting(true);
 
@@ -162,7 +162,7 @@ const Login = ({ navigation }) => {
         <StatusBar style="dark" />
         <InnerContainer>
           <PageLogo resizeMode="cover" source={require('./../assets/img/expo-bg1.png')} />
-          <PageTitle>Flower Crib</PageTitle>
+          <PageTitle>Flower Crib </PageTitle>
           <SubTitle>Account Login</SubTitle>
 
           <Formik
