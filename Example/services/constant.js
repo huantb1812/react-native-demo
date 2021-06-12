@@ -1,1 +1,1 @@
-export const STORAGE_KEY = 'flowerCribCredentials';
+export const STORAGE_KEY = 'storeCredentials';
