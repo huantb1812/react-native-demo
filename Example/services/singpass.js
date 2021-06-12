@@ -9,7 +9,7 @@ import proxy from './proxy';
 //     identityserver: {
 //         issuer: 'https://demo.identityserver.io',
 //         clientId: 'interactive.public',
-//         redirectUrl: 'io.identityserver.demo:/oauthredirect',
+//         redirectUrl: 'io.identityserver.demo://app/oauthredirect',
 //         additionalParameters: {},
 //         scopes: ['openid', 'profile', 'email', 'offline_access'],
 
@@ -99,7 +99,7 @@ export async function logoutAsync(accessToken) {
 
 export async function loginSingpass() {
     const config = {
-        redirectUrl: 'io.identityserver.demo:/oauthredirect?isSingpass=true',
+        redirectUrl: 'io.identityserver.demo://app/oauthredirect?isSingpass=true',
         ...configs.identityserver
     };
     // get url singpass

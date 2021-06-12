@@ -1,4 +1,4 @@
-import React, { useState, useContext,useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StatusBar } from 'react-native';
 
 // formik
@@ -47,7 +47,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
 
-const Login = ({ route,navigation }) => {
+const Login = ({ route, navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
@@ -178,41 +178,9 @@ const Login = ({ route,navigation }) => {
           >
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
               <StyledFormArea>
-                {/* <MyTextInput
-                  label="Email Address"
-                  placeholder="andyj@gmail.com"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange('email')}
-                  onBlur={handleBlur('email')}
-                  value={values.email}
-                  keyboardType="email-address"
-                  icon="mail"
-                />
-                <MyTextInput
-                  label="Password"
-                  placeholder="* * * * * * * *"
-                  placeholderTextColor={darkLight}
-                  onChangeText={handleChange('password')}
-                  onBlur={handleBlur('password')}
-                  value={values.password}
-                  secureTextEntry={hidePassword}
-                  icon="lock"
-                  isPassword={true}
-                  hidePassword={hidePassword}
-                  setHidePassword={setHidePassword}
-                /> */}
+                
                 <MsgBox type={messageType}>{message}</MsgBox>
-
-                {/* {!isSubmitting && (
-                  <StyledButton onPress={handleSubmit}>
-                    <ButtonText>Login</ButtonText>
-                  </StyledButton>
-                )}
-                {isSubmitting && (
-                  <StyledButton disabled={true}>
-                    <ActivityIndicator size="large" color={primary} />
-                  </StyledButton>
-                )}  <Line /> */}
+             
                 {!is4Submitting && (
                   <StyledButton onPress={handleIs4Signin} is4={true}>
                     {/* <Fontisto name="google" size={25} color={primary} /> */}

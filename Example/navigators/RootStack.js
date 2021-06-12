@@ -12,17 +12,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './../screens/Login';
 import Signup from './../screens/Signup';
 import Welcome from './../screens/Welcome';
+import Oauthredirect from './../screens/Oauthredirect';
+import Setting from './../screens/Setting';
 
 const Stack = createStackNavigator();
 
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
+import linking from './linking';
 
 const RootStack = () => {
   return (
     <CredentialsContext.Consumer>
       {({ storedCredentials }) => (
-        <NavigationContainer style={{ backgroundColor: 'red' }}>
+        <NavigationContainer style={{ backgroundColor: 'red' }} linking={linking} >
           <Stack.Navigator
             screenOptions={{
               headerStyle: {
@@ -36,20 +39,27 @@ const RootStack = () => {
               },
             }}
           >
-            {storedCredentials ? (
-              <Stack.Screen
-                options={{
-                  headerTintColor: primary,
-                }}
-                name="Welcome"
-                component={Welcome}
-              />
+
+            <Stack.Screen name="login" component={Login} />
+            <Stack.Screen options={{ headerTintColor: primary }} name="welcome" component={Welcome} />
+            <Stack.Screen name="signup" component={Signup} />
+            <Stack.Screen name="oauthredirect" component={Oauthredirect} />
+            <Stack.Screen name="setting" component={Setting} />
+
+            {/* {storedCredentials ? (
+              <>
+                <Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome}/>
+                <Stack.Screen name="oauthredirect" component={Oauthredirect} />
+                <Stack.Screen name="setting" component={Setting} />
+              </>
             ) : (
               <>
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Signup" component={Signup} />
+                <Stack.Screen name="login" component={Login} />
+                <Stack.Screen name="signup" component={Signup} />
+                <Stack.Screen name="oauthredirect" component={Oauthredirect} />
+                <Stack.Screen name="setting" component={Setting} />
               </>
-            )}
+            )} */}
           </Stack.Navigator>
         </NavigationContainer>
       )}
