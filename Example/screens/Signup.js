@@ -46,6 +46,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
+import { STORAGE_KEY } from './../services/constant';
 
 const Signup = ({ navigation }) => {
   const [hidePassword, setHidePassword] = useState(true);
@@ -102,7 +103,7 @@ const Signup = ({ navigation }) => {
 
   // Persisting login after signup
   const persistLogin = (credentials, message, status) => {
-    AsyncStorage.setItem('flowerCribCredentials', JSON.stringify(credentials))
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(credentials))
       .then(() => {
         handleMessage(message, status);
         setStoredCredentials(credentials);

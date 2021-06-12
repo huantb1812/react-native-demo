@@ -21,6 +21,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CredentialsContext } from './../components/CredentialsContext';
 
 import * as Singpass from '../services/singpass';
+import { STORAGE_KEY } from './../services/constant';
 
 const Welcome = () => {
   // credentials context
@@ -39,7 +40,7 @@ const Welcome = () => {
       .then(result => {
         const { type } = result;
         if (type == 'success') {
-          AsyncStorage.removeItem('flowerCribCredentials')
+          AsyncStorage.removeItem(STORAGE_KEY)
             .then(() => {
               setStoredCredentials("");
             })
@@ -54,7 +55,6 @@ const Welcome = () => {
 
   };
   const refreshToken = () => {
-    debugger;
     console.log('call refresh token:', authState?.refreshToken);
     // Singpass.refreshTokenAsync(authState.refreshToken)
     //   .then(result => {
@@ -62,7 +62,7 @@ const Welcome = () => {
     //     //     const { type, user, authState } = result;
     //     //     if (type == 'success') {
     //     //       const { email, name, photoUrl } = user;
-    //     //       AsyncStorage.setItem('flowerCribCredentials', JSON.stringify(credentials))
+    //     //       AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(credentials))
     //     //       .then(() => {
     //     //         // handleMessage(message, status);
     //     //         setStoredCredentials(credentials);
@@ -84,7 +84,7 @@ const Welcome = () => {
         <WelcomeImage resizeMode="cover" source={require('./../assets/img/expo-bg2.png')} />
 
         <WelcomeContainer>
-          <PageTitle welcome={true}>Welcome! Buddy</PageTitle>
+          <PageTitle welcome={true}>Welcome to MySurgery</PageTitle>
           <SubTitle welcome={true}>{name || 'Olga Simpson'}</SubTitle>
           <SubTitle welcome={true}>{email || 'olgasimp@gmail.com'}</SubTitle>
           <Text refreshToken={true}>{authState?.refreshToken || ''}</Text>

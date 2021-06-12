@@ -1,11 +1,6 @@
 const config = {
   screens: {
-    welcome: {
-      path: "welcome",
-      parse: {
-        id: (id) => `${id}`,
-      },
-    },
+    welcome:"welcome",
     oauthredirect: {
       path: "oauthredirect/:issingpass",
       parse: {

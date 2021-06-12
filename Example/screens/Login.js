@@ -46,8 +46,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // credentials context
 import { CredentialsContext } from './../components/CredentialsContext';
+import { STORAGE_KEY } from './../services/constant';
+
 
 const Login = ({ route, navigation }) => {
+  
+
+
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState();
   const [messageType, setMessageType] = useState();
@@ -145,7 +150,7 @@ const Login = ({ route, navigation }) => {
   };
   // Persisting login
   const persistLogin = (credentials, message, status) => {
-    AsyncStorage.setItem('flowerCribCredentials', JSON.stringify(credentials))
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(credentials))
       .then(() => {
         handleMessage(message, status);
         setStoredCredentials(credentials);
@@ -162,7 +167,7 @@ const Login = ({ route, navigation }) => {
         <StatusBar style="dark" />
         <InnerContainer>
           <PageLogo resizeMode="cover" source={require('./../assets/img/expo-bg1.png')} />
-          <PageTitle>Flower Crib </PageTitle>
+          <PageTitle>My Surgery </PageTitle>
           <SubTitle>Account Login</SubTitle>
 
           <Formik
@@ -178,9 +183,9 @@ const Login = ({ route, navigation }) => {
           >
             {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
               <StyledFormArea>
-                
+
                 <MsgBox type={messageType}>{message}</MsgBox>
-             
+
                 {!is4Submitting && (
                   <StyledButton onPress={handleIs4Signin} is4={true}>
                     {/* <Fontisto name="google" size={25} color={primary} /> */}

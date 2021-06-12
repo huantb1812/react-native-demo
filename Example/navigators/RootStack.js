@@ -40,16 +40,15 @@ const RootStack = () => {
             }}
           >
 
-            <Stack.Screen name="login" component={Login} />
+            {/* <Stack.Screen name="login" component={Login} />
             <Stack.Screen options={{ headerTintColor: primary }} name="welcome" component={Welcome} />
             <Stack.Screen name="signup" component={Signup} />
             <Stack.Screen name="oauthredirect" component={Oauthredirect} />
-            <Stack.Screen name="setting" component={Setting} />
+            <Stack.Screen name="setting" component={Setting} /> */}
 
-            {/* {storedCredentials ? (
+            {storedCredentials ? (
               <>
-                <Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome}/>
-                <Stack.Screen name="oauthredirect" component={Oauthredirect} />
+                <Stack.Screen options={{ headerTintColor: primary }} name="Welcome" component={Welcome} />
                 <Stack.Screen name="setting" component={Setting} />
               </>
             ) : (
@@ -59,7 +58,7 @@ const RootStack = () => {
                 <Stack.Screen name="oauthredirect" component={Oauthredirect} />
                 <Stack.Screen name="setting" component={Setting} />
               </>
-            )} */}
+            )}
           </Stack.Navigator>
         </NavigationContainer>
       )}

@@ -1,7 +1,8 @@
 import { useContext } from 'react';
-import { Linking, LogBox,Alert } from 'react-native';
+import { Linking, LogBox, Alert } from 'react-native';
 import { authorize, refresh, revoke, prefetchConfiguration } from 'react-native-app-auth';
 import proxy from './proxy';
+import { STORAGE_KEY } from './constant';
 
 
 
@@ -23,16 +24,16 @@ import proxy from './proxy';
 
 const configs = {
     identityserver: {
-        issuer: 'https://test-mysurgery.singhealth.com.sg/identity',
+        issuer: 'https://subdomain.domain.com.sg/identity',
         clientId: 'native.code',
         redirectUrl: 'io.identityserver.demo:/oauthredirect',
         additionalParameters: {},
         scopes: ['openid', 'profile', 'offline_access'],
 
         serviceConfiguration: {
-            authorizationEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/authorize',
-            tokenEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/token',
-            revocationEndpoint: 'https://test-mysurgery.singhealth.com.sg/identity/connect/endsession'
+            authorizationEndpoint: 'https://subdomain.domain.com.sg/identity/connect/authorize',
+            tokenEndpoint: 'https://subdomain.domain.com.sg/identity/connect/token',
+            revocationEndpoint: 'https://subdomain.domain.com.sg/identity/connect/endsession'
         }
     }
 };
@@ -99,7 +100,7 @@ export async function logoutAsync(accessToken) {
 
 export async function loginSingpass() {
     const config = {
-        redirectUrl: 'io.identityserver.demo://app/oauthredirect?isSingpass=true',
+        redirectUrl: 'io.identityserver.demo://app/oauthredirect/true',
         ...configs.identityserver
     };
     // get url singpass
@@ -109,9 +110,6 @@ export async function loginSingpass() {
     // update url singpass (only demo)
     const singpassUrl = updateurl(singpassOrginalUrl);// redirect with this url
     if (Linking.canOpenURL(singpassUrl)) {
-        Linking.addListener('url', (e) => {
-            console.log('event call back url', e);
-        });
         await Linking.openURL(singpassUrl);
         console.log('done singpass');
     }
@@ -134,3 +132,15 @@ function paramReplace(name, string, value) {
 
     return newString;
 }
+
+export function checkLoginCredentials() {
+    AsyncStorage.getItem(STORAGE_KEY)
+        .then((result) => {
+            if (result !== null) {
+                setStoredCredentials(JSON.parse(result));
+            } else {
+                setStoredCredentials(null);
+            }
+        })
+        .catch((error) => console.log(error));
+};
