@@ -46,7 +46,7 @@ export async function logInAsync() {
             type: 'success',
             user: {
                 name: 'Nguyen Van Huan',
-                email: 'nguyen.van.huan@ihis.com.sg',
+                email: 'nguyen.van.huan@domain.com.sg',
                 photoUrl: ''
             },
             authState: { ...newState }
@@ -70,7 +70,7 @@ export async function refreshTokenAsync(rToken) {
             type: 'success',
             user: {
                 name: 'Nguyen Van Huan',
-                email: 'nguyen.van.huan@ihis.com.sg',
+                email: 'nguyen.van.huan@domain.com.sg',
                 photoUrl: ''
             },
             authState: {
